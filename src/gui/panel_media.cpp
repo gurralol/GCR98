@@ -1,0 +1,15 @@
+#include "panel_media.h"
+
+PanelMedia::PanelMedia(wxWindow* parent, wxWindowID id, wxPoint pos, wxSize size) :
+	wxPanel(parent, id, pos, size)
+{
+	boxSizerMaster = new wxBoxSizer(wxVERTICAL);
+	this->SetSizer(boxSizerMaster);
+
+	this->SetBackgroundColour(wxColor(0, 0, 0));
+}
+
+PanelMedia::~PanelMedia()
+{
+
+}

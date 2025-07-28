@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\app.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mainframe.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filters\filter_blur.cpp">
+      <Filter>src\filters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utilities\filemanager.cpp">
+      <Filter>src\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utilities\filtermanager.cpp">
+      <Filter>src\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utilities\img_utils.cpp">
+      <Filter>src\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utilities\mediaplayer.cpp">
+      <Filter>src\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\menubar.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_files.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_files_settings.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_filter.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_filters.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_filters_settings.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_media.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_mediactrls.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_playlist.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_render_settings.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_vcr.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\app.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mainframe.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filters\filter_blur.h">
+      <Filter>src\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\filemanager.h">
+      <Filter>src\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\filtermanager.h">
+      <Filter>src\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\img_utils.h">
+      <Filter>src\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\mediaplayer.h">
+      <Filter>src\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\menubar.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_files.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_files_settings.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_filter.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_filters.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_filters_settings.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_media.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_mediactrls.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_playlist.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_render_settings.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_vcr.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\ids.h">
+      <Filter>src\utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{49e4f173-26eb-4915-b357-eb0ed3c779ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gui">
+      <UniqueIdentifier>{b70980fb-a5a8-47e8-97be-fa62aa064b0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utilities">
+      <UniqueIdentifier>{b6e47ebd-f8f0-4c50-bc21-014c32b71df9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\filters">
+      <UniqueIdentifier>{8ea1e558-ba7e-465a-9ca5-3358b1f8da89}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
