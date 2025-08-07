@@ -55,6 +55,21 @@
     <ClCompile Include="src\gui\panel_vcr.cpp">
       <Filter>src\gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\controllers\controller_filemanager.cpp">
+      <Filter>src\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\controller_filtermanager.cpp">
+      <Filter>src\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\controller_mediaplayer.cpp">
+      <Filter>src\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panel_master.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\filters\filter_faceswap.cpp">
+      <Filter>src\filters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app.h">
@@ -114,6 +129,33 @@
     <ClInclude Include="src\utilities\ids.h">
       <Filter>src\utilities</Filter>
     </ClInclude>
+    <ClInclude Include="src\controllers\controller_filemanager.h">
+      <Filter>src\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controllers\controller_filtermanager.h">
+      <Filter>src\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controllers\controller_mediaplayer.h">
+      <Filter>src\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interfaces\i_filemanager.h">
+      <Filter>src\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interfaces\i_filtermanager.h">
+      <Filter>src\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interfaces\i_mediaplayer.h">
+      <Filter>src\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panel_master.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filters\filters.h">
+      <Filter>src\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filters\filter_faceswap.h">
+      <Filter>src\filters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -127,6 +169,12 @@
     </Filter>
     <Filter Include="src\filters">
       <UniqueIdentifier>{8ea1e558-ba7e-465a-9ca5-3358b1f8da89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\controllers">
+      <UniqueIdentifier>{f6f7e59a-9073-4923-88b7-29be2a379c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\interfaces">
+      <UniqueIdentifier>{5d193803-95bc-4a75-9908-fc4de3e220cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

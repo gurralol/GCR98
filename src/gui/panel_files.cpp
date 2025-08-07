@@ -1,4 +1,3 @@
-#include <wx/collpane.h>
 #include "panel_files.h"
 
 PanelFiles::PanelFiles(wxWindow* parent, wxWindowID id, wxPoint pos, wxSize size) :

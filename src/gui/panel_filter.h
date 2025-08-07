@@ -13,7 +13,6 @@ public:
 	wxBoxSizer* boxSizerContent;
 	//wxString textName;
 
-private:
 	wxBoxSizer* boxSizerMaster;
 
 	wxBoxSizer* boxSizerTopbar;
@@ -39,4 +38,6 @@ private:
 	wxStaticLine* staticLine1;
 
 	//wxStaticText* textAuthor;
+
+	virtual wxImage ApplyFilter(wxImage img);
 };

@@ -35,14 +35,9 @@ wxImage ImgUtils::Resize_Fit(wxImage img, int targetSizeX, int targetSizeY)
     }
 
     wxImage temp = img;
-    temp.Rescale(srcImgX, srcImgY, wxIMAGE_QUALITY_HIGH);
+    temp.Rescale(srcImgX, srcImgY, wxIMAGE_QUALITY_BICUBIC);
 
     return temp;
-}
-
-wxImage ImgUtils::Resize_Fill(wxImage img, int targetSizeX, int targetSizeY)
-{
-    return wxImage();
 }
 
 wxPoint ImgUtils::Position_Center(wxImage img, int windowSizeX, int windowSizeY)
@@ -72,6 +67,52 @@ wxPoint ImgUtils::Position_Center(wxImage img, int windowSizeX, int windowSizeY)
     int posY = (boxSizeY - srcImgY) / 2;
 
     return wxPoint(posX, posY);
+}
+
+cv::Mat ImgUtils::ResizeCvMat(cv::Mat img, int targetSizeX, int targetSizeY)
+{
+    int boxSizeX = targetSizeX;
+    int boxSizeY = targetSizeY;
+    float boxAr = static_cast<float>(boxSizeX) / static_cast<float>(boxSizeY);
+
+    int srcImgX = img.cols;
+    int srcImgY = img.rows;
+    float srcAr = static_cast<float>(srcImgX) / static_cast<float>(srcImgY);
+
+    if (boxAr > srcAr) {
+        srcImgY = boxSizeY;
+        srcImgX = boxSizeY * srcAr;
+    }
+    else if (boxAr < srcAr) {
+        srcImgX = boxSizeX;
+        srcImgY = boxSizeX / srcAr;
+    }
+    else if (boxAr == srcAr) {
+        srcImgX = boxSizeX;
+        srcImgY = boxSizeY;
+    }
+
+    cv::Mat temp = img;
+    cv::resize(temp, temp, cv::Size(srcImgX, srcImgY), 0, 0, cv::INTER_CUBIC);
+
+    return temp;
+}
+
+wxImage ImgUtils::wxFromCv(const cv::Mat& mat)
+{
+    cv::Mat rgb;
+    cv::cvtColor(mat, rgb, cv::COLOR_BGR2RGB);
+    wxImage img = wxImage(rgb.cols, rgb.rows, rgb.data, true);
+    wxImage safe = img.Copy();
+    return safe;
+}
+
+cv::Mat ImgUtils::cvFromWx(wxImage img)
+{
+    wxImage copy = img.Copy();
+    cv::Mat mat(img.GetHeight(), img.GetWidth(), CV_8UC3, (void*)copy.GetData());
+    cv::cvtColor(mat, mat, cv::COLOR_RGB2BGR);
+    return mat.clone();
 }
 
 void ImgUtils::Borders_Rounded(wxImage& img, int radius)
@@ -198,7 +239,7 @@ wxImage ImgUtils::GetThumbnail_ThumbnailCache(std::filesystem::path path, int wi
         if (fit == 0) {
             double scaleX = (double)width / bmp.bmWidth;
             double scaleY = (double)height / bmp.bmHeight;
-            double scale = min(scaleX, scaleY);
+            double scale = std::min(scaleX, scaleY);
             finalWidth = static_cast<int>(bmp.bmWidth * scale);
             finalHeight = static_cast<int>(bmp.bmHeight * scale);
         }

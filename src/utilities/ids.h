@@ -3,9 +3,13 @@
 
 enum
 {
-	gcrOPEN_FILE,
+	gcrOPEN_FILES,
 	gcrOPEN_DIRECTORY,
 	gcrEXIT = wxID_EXIT,
+
+	gcrFILTER_LEVELS,
+	gcrFILTER_BLUR,
+	gcrFILTER_FACESWAP,
 
 	gcrABOUT = wxID_ABOUT,
 

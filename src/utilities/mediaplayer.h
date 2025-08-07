@@ -1,8 +1,26 @@
 #pragma once
 #include <wx/wxprec.h>
-#include "../gui/panel_media.h"
-#include "../gui/panel_mediactrls.h"
-#include "../gui/panel_playlist.h"
+#include <filesystem>
+#include <fstream>
+#include <functional>
+#include <chrono>
+#include <thread>
+#include <atomic>
+#include <mutex>
+
+extern "C" {
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#include <libavutil/imgutils.h>
+#include <libavutil/avutil.h>
+#include <libswscale/swscale.h>
+#include <libswresample/swresample.h>
+}
+
+#include <SDL.h>
+
+#include <webp/demux.h>
+#include <webp/decode.h>
 
 class MediaPlayer
 {
@@ -10,36 +28,49 @@ public:
 	MediaPlayer();
 	~MediaPlayer();
 
-	wxString path;
-	wxSize resolution;
+	std::filesystem::path path;
+	int mediaWidth;
+	int mediaHeight;
 	float fps;
 	float duration;
-	float size;
+	std::function<void()> paintCallback;
+	std::mutex frameMutex;
 
-	bool seek;
-	int loop;
-	bool autoplay;
+	bool loop;
 
-	enum //LOOP
-	{
-		NONE,
-		LOOP,
-		LOOP1,
-		SHUFFLE
-	};
+	wxImage currFrame;
+	double currTime;
+	double seekTarget;
 
-	// FFmpeg contexts & libwebp data
+	std::atomic_bool restrictProcessing;
+	std::atomic_bool isProcessing;
 
-	void ClearAll();
-	void ClearFFmpeg();
-	void ClearWebp();
+	// FFmpeg
+	AVFormatContext* formatCtx;
+	AVCodecContext* vCodecCtx;
+	AVCodecContext* aCodecCtx;
+	int vStreamIdx;
+	int aStreamIdx;
 
-	void ReadFrameFFmpeg(int frame);
-	void ReadFrameLibwebp(int frame);
+	// Libwebp
+	WebPData* webpData;
+	WebPDemuxer* webpDemux;
+
+	void InitFFmpeg();
+	void InitWebP();
+
+	void FreeAll();
+	void FreeFFmpeg();
+	void FreeWebp();
 	
-	void SeekFFmpeg(double targetPts);
-	void SeekLibwebp(double targetPts);
+	void SeekFFmpeg();
+	void SeekLibwebp();
+
+	void DecodeFrameFFmpeg();
+	void DecodeFrameLibwebp();
 
 	void ProcessFFmpeg();
 	void ProcessLibwebp();
+
+	void StopProcessing();
 };

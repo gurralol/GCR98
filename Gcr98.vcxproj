@@ -20,13 +20,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\app.cpp" />
+    <ClCompile Include="src\controllers\controller_filemanager.cpp" />
+    <ClCompile Include="src\controllers\controller_filtermanager.cpp" />
+    <ClCompile Include="src\controllers\controller_mediaplayer.cpp" />
     <ClCompile Include="src\filters\filter_blur.cpp" />
+    <ClCompile Include="src\filters\filter_faceswap.cpp" />
     <ClCompile Include="src\gui\menubar.cpp" />
     <ClCompile Include="src\gui\panel_files.cpp" />
     <ClCompile Include="src\gui\panel_files_settings.cpp" />
     <ClCompile Include="src\gui\panel_filter.cpp" />
     <ClCompile Include="src\gui\panel_filters.cpp" />
     <ClCompile Include="src\gui\panel_filters_settings.cpp" />
+    <ClCompile Include="src\gui\panel_master.cpp" />
     <ClCompile Include="src\gui\panel_media.cpp" />
     <ClCompile Include="src\gui\panel_mediactrls.cpp" />
     <ClCompile Include="src\gui\panel_playlist.cpp" />
@@ -40,18 +45,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app.h" />
+    <ClInclude Include="src\controllers\controller_filemanager.h" />
+    <ClInclude Include="src\controllers\controller_filtermanager.h" />
+    <ClInclude Include="src\controllers\controller_mediaplayer.h" />
+    <ClInclude Include="src\filters\filters.h" />
     <ClInclude Include="src\filters\filter_blur.h" />
+    <ClInclude Include="src\filters\filter_faceswap.h" />
     <ClInclude Include="src\gui\menubar.h" />
     <ClInclude Include="src\gui\panel_files.h" />
     <ClInclude Include="src\gui\panel_files_settings.h" />
     <ClInclude Include="src\gui\panel_filter.h" />
     <ClInclude Include="src\gui\panel_filters.h" />
     <ClInclude Include="src\gui\panel_filters_settings.h" />
+    <ClInclude Include="src\gui\panel_master.h" />
     <ClInclude Include="src\gui\panel_media.h" />
     <ClInclude Include="src\gui\panel_mediactrls.h" />
     <ClInclude Include="src\gui\panel_playlist.h" />
     <ClInclude Include="src\gui\panel_render_settings.h" />
     <ClInclude Include="src\gui\panel_vcr.h" />
+    <ClInclude Include="src\interfaces\i_filemanager.h" />
+    <ClInclude Include="src\interfaces\i_filtermanager.h" />
+    <ClInclude Include="src\interfaces\i_mediaplayer.h" />
     <ClInclude Include="src\mainframe.h" />
     <ClInclude Include="src\utilities\filemanager.h" />
     <ClInclude Include="src\utilities\filtermanager.h" />
@@ -113,12 +127,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ExternalIncludePath>C:\Libraries\wxWidgets-3.2.6\include;C:\Libraries\wxWidgets-3.2.6\include\msvc;C:\Libraries\ffmpeg-7.1.1-full_build-shared\include;C:\VulkanSDK\1.4.313.2\Include\SDL2;C:\Libraries\opencv\build\include;C:\Libraries\onnxruntime-win-x64-gpu-1.20.1\include;C:\Libraries\libwebp-1.6.0\src\;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>C:\Libraries\wxWidgets-3.2.6\include;C:\Libraries\wxWidgets-3.2.6\include\msvc;C:\Libraries\ffmpeg-7.1.1-full_build-shared\include;C:\VulkanSDK\1.4.313.2\Include\SDL2;C:\Libraries\opencv\build\include;C:\Libraries\onnxruntime-win-x64-gpu-1.20.1\include;C:\Libraries\libwebp-1.6.0\src\;C:\Libraries\eigen-3.4.0</ExternalIncludePath>
     <LibraryPath>C:\Libraries\wxWidgets-3.2.6\lib\vc_x64_lib;C:\Libraries\ffmpeg-7.1.1-full_build-shared\lib;C:\VulkanSDK\1.4.313.2\Lib;C:\Libraries\opencv\build\x64\vc16\lib;C:\Libraries\onnxruntime-win-x64-gpu-1.20.1\lib;C:\Libraries\libwebp-1.6.0\output\release-static\x64\lib;$(LibraryPath)</LibraryPath>
     <IncludePath>C:\Users\Gusta\source\repos\Barfograph;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ExternalIncludePath>C:\Libraries\wxWidgets-3.2.6\include;C:\Libraries\wxWidgets-3.2.6\include\msvc;C:\Libraries\ffmpeg-7.1.1-full_build-shared\include;C:\VulkanSDK\1.4.313.2\Include\SDL2;C:\Libraries\opencv\build\include;C:\Libraries\onnxruntime-win-x64-gpu-1.20.1\include;C:\Libraries\libwebp-1.6.0\src\;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>C:\Libraries\wxWidgets-3.2.6\include;C:\Libraries\wxWidgets-3.2.6\include\msvc;C:\Libraries\ffmpeg-7.1.1-full_build-shared\include;C:\VulkanSDK\1.4.313.2\Include\SDL2;C:\Libraries\opencv\build\include;C:\Libraries\onnxruntime-win-x64-gpu-1.20.1\include;C:\Libraries\libwebp-1.6.0\src\;C:\Libraries\eigen-3.4.0</ExternalIncludePath>
     <LibraryPath>C:\Libraries\wxWidgets-3.2.6\lib\vc_x64_lib;C:\Libraries\ffmpeg-7.1.1-full_build-shared\lib;C:\VulkanSDK\1.4.313.2\Lib;C:\Libraries\opencv\build\x64\vc16\lib;C:\Libraries\onnxruntime-win-x64-gpu-1.20.1\lib;C:\Libraries\libwebp-1.6.0\output\release-static\x64\lib;$(LibraryPath)</LibraryPath>
     <IncludePath>C:\Users\Gusta\source\repos\Barfograph;$(IncludePath)</IncludePath>
   </PropertyGroup>
@@ -158,11 +172,12 @@
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>avcodec.lib;avformat.lib;avutil.lib;swscale.lib;swresample.lib;SDL2.lib;opencv_world490.lib;opencv_world490d.lib;onnxruntime.lib;onnxruntime_providers_cuda.lib;onnxruntime_providers_shared.lib;onnxruntime_providers_tensorrt.lib;libsharpyuv.lib;libwebp.lib;libwebpdecoder.lib;libwebpdemux.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>avcodec.lib;avformat.lib;avutil.lib;swscale.lib;swresample.lib;SDL2.lib;opencv_world490d.lib;onnxruntime.lib;onnxruntime_providers_cuda.lib;onnxruntime_providers_shared.lib;onnxruntime_providers_tensorrt.lib;libsharpyuv.lib;libwebp.lib;libwebpdecoder.lib;libwebpdemux.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -181,7 +196,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>avcodec.lib;avformat.lib;avutil.lib;swscale.lib;swresample.lib;SDL2.lib;opencv_world490.lib;opencv_world490d.lib;onnxruntime.lib;onnxruntime_providers_cuda.lib;onnxruntime_providers_shared.lib;onnxruntime_providers_tensorrt.lib;libsharpyuv.lib;libwebp.lib;libwebpdecoder.lib;libwebpdemux.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>avcodec.lib;avformat.lib;avutil.lib;swscale.lib;swresample.lib;SDL2.lib;opencv_world490.lib;onnxruntime.lib;onnxruntime_providers_cuda.lib;onnxruntime_providers_shared.lib;onnxruntime_providers_tensorrt.lib;libsharpyuv.lib;libwebp.lib;libwebpdecoder.lib;libwebpdemux.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

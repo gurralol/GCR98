@@ -77,3 +77,8 @@ PanelFilter::~PanelFilter()
 {
 
 }
+
+wxImage PanelFilter::ApplyFilter(wxImage img)
+{
+	return wxImage();
+}

@@ -1,18 +1,9 @@
 #pragma once
 #include <wx/wxprec.h>
 
-// GUI
 #include "gui/menubar.h"
-#include "gui/panel_files_settings.h"
-#include "gui/panel_files.h"
-#include "gui/panel_playlist.h"
-#include "gui/panel_media.h"
-#include "gui/panel_mediactrls.h"
-#include "gui/panel_filters_settings.h"
-#include "gui/panel_filters.h"
-#include "gui/panel_render_settings.h"
+#include "gui/panel_master.h"
 
-// Utilities
 #include "utilities/filemanager.h"
 #include "utilities/mediaplayer.h"
 #include "utilities/filtermanager.h"
@@ -23,38 +14,45 @@ public:
     MainFrame(const wxString& title);
 
     // GUI
-    wxBoxSizer* boxSizerMaster;
-    wxBoxSizer* boxSizerLeft;
-    wxBoxSizer* boxSizerMiddle;
-    wxBoxSizer* boxSizerRight;
+    wxBoxSizer* boxSizerFrame;
+    PanelMaster* panelMaster;
 
-    MenuBar* menuBar;
+    // Ptrs
+    PanelFilesSettings* panelFilesSettings;
     PanelFiles* panelFiles;
     PanelPlaylist* panelPlaylist;
     PanelMedia* panelMedia;
     PanelMediaCtrls* panelMediaCtrls;
+    PanelFiltersSettings* panelFiltersSettings;
     PanelFilters* panelFilters;
     PanelRenderSettings* panelRenderSettings;
 
-    PanelFilesSettings* panelFilesSettings;
-    PanelFiltersSettings* panelFiltersSettings;
+    // MenuBar
+    MenuBar* menuBar;
 
     // Utilities
-    FileManager* gcrFileManager;
-    FileManagerExtended* gcrFileManagerExtended;
-    MediaPlayer* gcrMediaPlayer;
-    FilterManager* gcrFilterManager;
+    FileManager* fileManager;
+    FileManagerExtended* fileManagerEx;
+    MediaPlayer* mediaPlayer;
+    FilterManager* filterManager;
 
-    void MenuOpenFiles(wxCommandEvent& event);
-    void MenuOpenDirectory(wxCommandEvent& event);
-    void MenuExit(wxCommandEvent& event);
+    //Bindings
+    void OpenFiles(wxCommandEvent& event);
+    void AddFilter(wxCommandEvent& event);
+    void FileClick(wxCommandEvent& event);
+    void MediaPaint(wxPaintEvent& event);
+    void OnResize(wxSizeEvent& event);
 
-    // PanelFilesSettings
-    void SetRecursiveMode(wxCommandEvent& event);
-    void SetSortMode(wxCommandEvent& event);
-    void SetViewMode(wxCommandEvent& event);
-    void SetGroupMode(wxCommandEvent& event);
+    void SliderPtsRefresh();
 
+    void BtnPlayPause(wxCommandEvent& event);
+    void BtnStop(wxCommandEvent& event);
+    void BtnSeek(wxCommandEvent& event);
+    void BtnLoop(wxCommandEvent& event);
+
+    void SliderPts(wxCommandEvent& event);
+
+    // Functions
     void SetPanelSettingsRecursively(wxWindow* parent);
 
 private:
