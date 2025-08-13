@@ -30,7 +30,7 @@ PanelMaster::PanelMaster(wxWindow* parent, wxWindowID id, wxPoint pos, wxSize si
     boxSizerMiddle->Add(panelMediaCtrls, 0, wxEXPAND);
     boxSizerRight->Add(panelFiltersSettings, 0);
     boxSizerRight->Add(panelFilters, 1);
-    boxSizerRight->Add(panelRenderSettings, 0);
+    //boxSizerRight->Add(panelRenderSettings, 0);
 }
 
 PanelMaster::~PanelMaster()

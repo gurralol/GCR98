@@ -44,9 +44,11 @@ public:
     void OnResize(wxSizeEvent& event);
 
     void SliderPtsRefresh();
-
+    
+    void BtnBack(wxCommandEvent& event);
     void BtnPlayPause(wxCommandEvent& event);
     void BtnStop(wxCommandEvent& event);
+    void BtnForward(wxCommandEvent& event);
     void BtnSeek(wxCommandEvent& event);
     void BtnLoop(wxCommandEvent& event);
 

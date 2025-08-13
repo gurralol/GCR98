@@ -61,14 +61,17 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title, 
     Bind(wxEVT_SIZE, &MainFrame::OnResize, this);
     mediaPlayer->paintCallback = [this]() {
         panelMedia->Refresh();
-        //SliderPtsRefresh();
+        SliderPtsRefresh();
         };
 
+    panelMediaCtrls->btnBack->Bind(wxEVT_BUTTON, &MainFrame::BtnBack, this);
     panelMediaCtrls->btnPlayPause->Bind(wxEVT_BUTTON, &MainFrame::BtnPlayPause, this);
     panelMediaCtrls->btnStop->Bind(wxEVT_BUTTON, &MainFrame::BtnStop, this);
+    panelMediaCtrls->btnForward->Bind(wxEVT_BUTTON, &MainFrame::BtnForward, this);
+    panelMediaCtrls->btnSeek->Bind(wxEVT_BUTTON, &MainFrame::BtnSeek, this);
     panelMediaCtrls->btnLoop->Bind(wxEVT_TOGGLEBUTTON, &MainFrame::BtnLoop, this);
     panelMediaCtrls->sliderVolume->Bind(wxEVT_SCROLL_THUMBTRACK, &MainFrame::SliderVolume, this);
-    panelMediaCtrls->sliderPts->Bind(wxEVT_SCROLL_THUMBTRACK, &MainFrame::SliderPts, this);
+    panelMediaCtrls->sliderPts->Bind(wxEVT_SLIDER, &MainFrame::SliderPts, this);
 }
 
 void MainFrame::SetPanelSettingsRecursively(wxWindow* parent)
@@ -259,6 +262,32 @@ void MainFrame::OnResize(wxSizeEvent& event)
     event.Skip();
 }
 
+void MainFrame::BtnBack(wxCommandEvent& event)
+{
+    if (mediaPlayer->isProcessing)
+    {
+        mediaPlayer->StopProcessing();
+    }
+
+    if (mediaPlayer->path.extension() == ".webp")
+    {
+
+    }
+    else
+    {
+        int sliderVal = panelMediaCtrls->sliderPts->GetValue();
+        mediaPlayer->seekTarget = (static_cast<double>(sliderVal) / 1000) * mediaPlayer->duration;
+        mediaPlayer->seekTarget -= 5.0;
+        mediaPlayer->SeekFFmpeg();
+
+        std::thread([this]() {
+            mediaPlayer->DecodeFrameFFmpeg();
+            }).detach();
+    }
+
+    event.Skip();
+}
+
 void MainFrame::BtnPlayPause(wxCommandEvent& event)
 {
     if (!mediaPlayer->isProcessing)
@@ -286,6 +315,32 @@ void MainFrame::BtnStop(wxCommandEvent& event)
 {
     mediaPlayer->StopProcessing();
     
+    event.Skip();
+}
+
+void MainFrame::BtnForward(wxCommandEvent& event)
+{
+    if (mediaPlayer->isProcessing)
+    {
+        mediaPlayer->StopProcessing();
+    }
+
+    if (mediaPlayer->path.extension() == ".webp")
+    {
+
+    }
+    else
+    {
+        int sliderVal = panelMediaCtrls->sliderPts->GetValue();
+        mediaPlayer->seekTarget = (static_cast<double>(sliderVal) / 1000) * mediaPlayer->duration;
+        mediaPlayer->seekTarget += 5.0;
+        mediaPlayer->SeekFFmpeg();
+
+        std::thread([this]() {
+            mediaPlayer->DecodeFrameFFmpeg();
+            }).detach();
+    }
+
     event.Skip();
 }
 
