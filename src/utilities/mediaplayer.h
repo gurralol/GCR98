@@ -33,6 +33,7 @@ public:
 	int mediaHeight;
 	float fps;
 	float duration;
+	float volume;
 	std::function<void()> paintCallback;
 	std::mutex frameMutex;
 

@@ -6,6 +6,7 @@ MediaPlayer::MediaPlayer()
 	mediaHeight = 0;
 	fps = 0;
 	duration = 0;
+	volume = 0.5f;
 
 	loop = false;
 
@@ -213,11 +214,66 @@ void MediaPlayer::DecodeFrameFFmpeg()
 		width, height, AV_PIX_FMT_RGB24,
 		SWS_BICUBIC, nullptr, nullptr, nullptr
 	);
+
+	// Initialize the SDL audio subsystem.
+	SDL_Init(SDL_INIT_AUDIO);
+
+	//Declare a software resampling context.
+	struct SwrContext* swrCtx = nullptr;
+
+	AVChannelLayout outChLayout = {};
+	av_channel_layout_default(&outChLayout, 2);
+
+	AVFrame* aFrame = nullptr;
+
+	SDL_AudioSpec want, have;
+	SDL_AudioDeviceID dev = NULL;
+
+	// If there's an audiostream, allocate
+	// the software resampling context.
+	if (aStreamIdx != -1)
+	{
+		int ret = swr_alloc_set_opts2(
+			&swrCtx,
+			&outChLayout,
+			AV_SAMPLE_FMT_S16,
+			44100,
+			&aCodecCtx->ch_layout,
+			aCodecCtx->sample_fmt,
+			aCodecCtx->sample_rate,
+			0, nullptr);
+
+		if (ret == 0) {
+			swr_init(swrCtx);
+
+			aFrame = av_frame_alloc();
+
+			SDL_zero(want);
+			want.freq = 44100;
+			want.format = AUDIO_S16SYS;
+			want.channels = 2;
+			want.samples = 4096;
+			want.callback = NULL;
+
+			dev = SDL_OpenAudioDevice(nullptr, 0, &want, &have, 0);
+			if (dev == 0)
+			{
+				std::cerr << "Failed to open audio: " << SDL_GetError() << std::endl;
+			}
+			else
+			{
+				SDL_PauseAudioDevice(dev, 0);
+			}
+		}
+	}
 	
 	bool framePainted = false;
 
 	loopPoint:
 	auto startTime = std::chrono::steady_clock::now();
+
+	double audioBasePts = -1.0;
+	std::chrono::steady_clock::time_point audioWallClockStart;
 
 	while (av_read_frame(formatCtx, packet) == 0)
 	{
@@ -227,7 +283,7 @@ void MediaPlayer::DecodeFrameFFmpeg()
 			{
 				while (avcodec_receive_frame(vCodecCtx, frame) == 0)
 				{
-					int pts = frame->pts * av_q2d(formatCtx->streams[vStreamIdx]->time_base);
+					double pts = frame->pts * av_q2d(formatCtx->streams[vStreamIdx]->time_base);
 					if (pts < seekTarget) continue;
 
 					sws_scale(
@@ -262,15 +318,93 @@ void MediaPlayer::DecodeFrameFFmpeg()
 					framePainted = true;
 					if (restrictProcessing) break;
 
-					double elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - startTime).count();
-					double delay = (currTime - seekTarget) - elapsed;
-					std::this_thread::sleep_for(std::chrono::duration<double>(delay));
+					if (aStreamIdx != -1) {
+						double audioClock = 0.0;
+
+						if (audioBasePts >= 0) {
+							auto now = std::chrono::steady_clock::now();
+							double wallClock = std::chrono::duration<double>(now - audioWallClockStart).count();
+							audioClock = audioBasePts + wallClock;
+						}
+						else {
+							audioClock = pts;  // fallback if no audio yet
+						}
+
+						double diff = pts - audioClock;
+
+						if (diff > 0)
+						{
+							std::this_thread::sleep_for(std::chrono::duration<double>(diff));
+						}
+						else if (diff < -0.1)
+						{
+							continue; // drop late frame
+						}
+					}
+					else
+					{
+						double elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - startTime).count();
+						double delay = (currTime - seekTarget) - elapsed;
+						std::this_thread::sleep_for(std::chrono::duration<double>(delay));
+					}
 				}
 			}
-			av_packet_unref(packet);
 		}
+		else if (packet->stream_index == aStreamIdx)
+		{
+			if (avcodec_send_packet(aCodecCtx, packet) == 0)
+			{
+				while (avcodec_receive_frame(aCodecCtx, aFrame) == 0)
+				{
+					uint8_t** outData;
+					int outLinesize;
+					av_samples_alloc_array_and_samples(
+						&outData, &outLinesize,
+						2, aFrame->nb_samples, AV_SAMPLE_FMT_S16, 0);
+
+					int nbOutSamples = swr_convert(
+						swrCtx,
+						outData,
+						aFrame->nb_samples,
+						(const uint8_t**)aFrame->data, aFrame->nb_samples);
+
+					int outBufferSize = av_samples_get_buffer_size(
+						nullptr, 2, nbOutSamples, AV_SAMPLE_FMT_S16, 1);
+
+					double framePts = aFrame->pts * av_q2d(formatCtx->streams[aStreamIdx]->time_base);
+
+					if (audioBasePts < 0) {
+						audioBasePts = framePts;
+						audioWallClockStart = std::chrono::steady_clock::now();
+						SDL_PauseAudioDevice(dev, 0);
+					}
+
+					int16_t* samples = reinterpret_cast<int16_t*>(outData[0]);
+					int numSamples = nbOutSamples * 2;
+
+					for (int j = 0; j < numSamples; j++)
+					{
+						samples[j] = static_cast<int16_t>(samples[j] * volume);
+					}
+
+					SDL_QueueAudio(dev, outData[0], outBufferSize);
+
+					av_freep(&outData[0]);
+					av_freep(&outData);
+
+					if (restrictProcessing) {
+						SDL_PauseAudioDevice(dev, 1);
+						SDL_CloseAudioDevice(dev);
+						break;
+					}
+				}
+			}
+		}
+		av_packet_unref(packet);
 		if (restrictProcessing && framePainted) break;
 	}
+
+	//if (aStreamIdx != -1) SDL_PauseAudioDevice(dev, 1);
 
 	if (loop && !restrictProcessing)
 	{

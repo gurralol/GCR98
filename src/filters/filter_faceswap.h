@@ -11,19 +11,28 @@
 class FilterFaceswap : public PanelFilter
 {
 public:
-	FilterFaceswap(wxWindow* parent, wxWindowID id, wxPoint pos, wxSize size = wxSize(50, 300));
+	FilterFaceswap(wxWindow* parent, wxWindowID id, wxPoint pos, wxSize size = wxSize(50, 400));
 	~FilterFaceswap();
 
 	// GUI
 	wxBoxSizer* boxSizerProvider;
+	wxBoxSizer* boxSizerDetectionThreshold;
+	wxBoxSizer* boxSizerSimilarityThreshold;
+	wxBoxSizer* boxSizerAutoSwap;
 	wxBoxSizer* boxSizerFacesTargetCtrls;
 	wxBoxSizer* boxSizerFacesSourceCtrls;
 
 	wxStaticText* textProvider;
+	wxStaticText* textDetectionThreshold;
+	wxStaticText* textSimilarityThreshold;
+	wxStaticText* textAutoSwap;
 	wxStaticText* textFacesTarget;
 	wxStaticText* textFacesSource;
 
 	wxChoice* choiceProvider;
+	wxSlider* sliderDetectionThreshold;
+	wxSlider* sliderSimilarityThreshold;
+	wxCheckBox* checkBoxAutoSwap;
 	wxButton* btnFindFaces;
 	wxButton* btnLoadFaces;
 
@@ -75,22 +84,32 @@ public:
 
 	struct face
 	{
-		int cx, cy, sx, sy;
+		bBox bBox;
+		std::vector<wxToggleButton*> btnBindings;
 		std::vector<float> embedding;
 		cv::Mat crop;
 	};
 
+	struct targetBtn
+	{
+		std::vector<float> embeddingSelf;
+		std::vector<wxToggleButton*> arrSrcBtns;
+		std::vector<float> embeddingSrc;
+	};
+
 	// Variables
-	std::vector<face> arrFacesTarget;
+	std::vector<targetBtn> arrFacesTarget;
 	std::vector<face> arrFacesSource;
 	wxImage* currFrame;
 
-	wxButton* btnSelectedTarget = nullptr;
+	wxToggleButton* btnSelectedTarget = nullptr;
+	std::vector<float> embeddingAutoSwap;
 
 	// Override
 	wxImage ApplyFilter(wxImage img) override;
 
 	// Buttons
+	void BtnAutoSwap(wxCommandEvent& event);
 	void BtnFindFaces(wxCommandEvent& event);
 	void BtnLoadFaces(wxCommandEvent& event);
 

@@ -50,6 +50,7 @@ public:
     void BtnSeek(wxCommandEvent& event);
     void BtnLoop(wxCommandEvent& event);
 
+    void SliderVolume(wxCommandEvent& event);
     void SliderPts(wxCommandEvent& event);
 
     // Functions

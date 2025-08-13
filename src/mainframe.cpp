@@ -67,6 +67,7 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title, 
     panelMediaCtrls->btnPlayPause->Bind(wxEVT_BUTTON, &MainFrame::BtnPlayPause, this);
     panelMediaCtrls->btnStop->Bind(wxEVT_BUTTON, &MainFrame::BtnStop, this);
     panelMediaCtrls->btnLoop->Bind(wxEVT_TOGGLEBUTTON, &MainFrame::BtnLoop, this);
+    panelMediaCtrls->sliderVolume->Bind(wxEVT_SCROLL_THUMBTRACK, &MainFrame::SliderVolume, this);
     panelMediaCtrls->sliderPts->Bind(wxEVT_SCROLL_THUMBTRACK, &MainFrame::SliderPts, this);
 }
 
@@ -265,6 +266,8 @@ void MainFrame::BtnPlayPause(wxCommandEvent& event)
         mediaPlayer->StopProcessing();
         mediaPlayer->restrictProcessing = false;
 
+        int sliderVal = panelMediaCtrls->sliderPts->GetValue();
+        mediaPlayer->seekTarget = (static_cast<double>(sliderVal) / 1000) * mediaPlayer->duration;
         mediaPlayer->SeekFFmpeg();
 
         std::thread([this]() {
@@ -312,6 +315,12 @@ void MainFrame::BtnLoop(wxCommandEvent& event)
     }
 
     event.Skip();
+}
+
+void MainFrame::SliderVolume(wxCommandEvent& event)
+{
+    int sliderVal = panelMediaCtrls->sliderVolume->GetValue();
+    mediaPlayer->volume = static_cast<float>(sliderVal) / 20;
 }
 
 void MainFrame::SliderPts(wxCommandEvent& event)
