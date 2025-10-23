@@ -106,6 +106,30 @@ bool FileManager::IsSupportedFile(std::filesystem::path path)
     return false;
 }
 
+int FileManager::IsImageFile(std::filesystem::path path)
+{
+    std::string ext = path.extension().string().c_str();
+
+    // Video formats
+    if (ext == ".mp4") return 1;
+    else if (ext == ".webm") return 1;
+    else if (ext == ".avi") return 1;
+    else if (ext == ".mov") return 1;
+    else if (ext == ".mkv") return 1;
+    else if (ext == ".m4v") return 1;
+    else if (ext == ".mpeg") return 1;
+
+    // Image formats
+    else if (ext == ".gif") return 1;
+    else if (ext == ".webp") return 1;
+    else if (ext == ".png") return 0;
+    else if (ext == ".jpg") return 0;
+    else if (ext == ".jpeg") return 0;
+    else if (ext == ".bmp") return 0;
+
+	return -1;
+}
+
 //-------------------------//
 //  File Manager Extended  // 
 //-------------------------//

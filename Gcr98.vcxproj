@@ -19,59 +19,55 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\app.cpp" />
-    <ClCompile Include="src\controllers\controller_filemanager.cpp" />
-    <ClCompile Include="src\controllers\controller_filtermanager.cpp" />
-    <ClCompile Include="src\controllers\controller_mediaplayer.cpp" />
-    <ClCompile Include="src\filters\filter_blur.cpp" />
-    <ClCompile Include="src\filters\filter_faceswap.cpp" />
-    <ClCompile Include="src\gui\menubar.cpp" />
-    <ClCompile Include="src\gui\panel_files.cpp" />
-    <ClCompile Include="src\gui\panel_files_settings.cpp" />
-    <ClCompile Include="src\gui\panel_filter.cpp" />
-    <ClCompile Include="src\gui\panel_filters.cpp" />
-    <ClCompile Include="src\gui\panel_filters_settings.cpp" />
-    <ClCompile Include="src\gui\panel_master.cpp" />
-    <ClCompile Include="src\gui\panel_media.cpp" />
-    <ClCompile Include="src\gui\panel_mediactrls.cpp" />
-    <ClCompile Include="src\gui\panel_playlist.cpp" />
-    <ClCompile Include="src\gui\panel_render_settings.cpp" />
-    <ClCompile Include="src\gui\panel_vcr.cpp" />
-    <ClCompile Include="src\mainframe.cpp" />
+    <ClCompile Include="src\gcr_app.cpp" />
+    <ClCompile Include="src\gui\frames\gcr_frame_main.cpp" />
+    <ClCompile Include="src\gui\frames\gcr_frame_preferences.cpp" />
+    <ClCompile Include="src\gui\gcr_button_base.cpp" />
+    <ClCompile Include="src\gui\gcr_frame_base.cpp" />
+    <ClCompile Include="src\gui\gcr_menubar_base.cpp" />
+    <ClCompile Include="src\gui\gcr_panel_base.cpp" />
+    <ClCompile Include="src\gui\gcr_slider_base.cpp" />
+    <ClCompile Include="src\gui\menubars\gcr_menubar_mainframe.cpp" />
+    <ClCompile Include="src\gui\panels\gcr_panel_files.cpp" />
+    <ClCompile Include="src\gui\panels\gcr_panel_filters.cpp" />
+    <ClCompile Include="src\gui\panels\gcr_panel_mediactrls.cpp" />
+    <ClCompile Include="src\gui\panels\gcr_panel_preferences.cpp" />
+    <ClCompile Include="src\gui\panels\gcr_panel_screen.cpp" />
+    <ClCompile Include="src\gui\panels\gcr_panel_vcr.cpp" />
     <ClCompile Include="src\utilities\filemanager.cpp" />
     <ClCompile Include="src\utilities\filtermanager.cpp" />
+    <ClCompile Include="src\utilities\gcr_aui_manager.cpp" />
     <ClCompile Include="src\utilities\img_utils.cpp" />
     <ClCompile Include="src\utilities\mediaplayer.cpp" />
+    <ClCompile Include="src\utilities\config_manager.cpp" />
+    <ClCompile Include="src\utilities\theme_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\app.h" />
-    <ClInclude Include="src\controllers\controller_filemanager.h" />
-    <ClInclude Include="src\controllers\controller_filtermanager.h" />
-    <ClInclude Include="src\controllers\controller_mediaplayer.h" />
-    <ClInclude Include="src\filters\filters.h" />
-    <ClInclude Include="src\filters\filter_blur.h" />
-    <ClInclude Include="src\filters\filter_faceswap.h" />
-    <ClInclude Include="src\gui\menubar.h" />
-    <ClInclude Include="src\gui\panel_files.h" />
-    <ClInclude Include="src\gui\panel_files_settings.h" />
-    <ClInclude Include="src\gui\panel_filter.h" />
-    <ClInclude Include="src\gui\panel_filters.h" />
-    <ClInclude Include="src\gui\panel_filters_settings.h" />
-    <ClInclude Include="src\gui\panel_master.h" />
-    <ClInclude Include="src\gui\panel_media.h" />
-    <ClInclude Include="src\gui\panel_mediactrls.h" />
-    <ClInclude Include="src\gui\panel_playlist.h" />
-    <ClInclude Include="src\gui\panel_render_settings.h" />
-    <ClInclude Include="src\gui\panel_vcr.h" />
+    <ClInclude Include="src\gcr_app.h" />
+    <ClInclude Include="src\gui\frames\gcr_frame_main.h" />
+    <ClInclude Include="src\gui\frames\gcr_frame_preferences.h" />
+    <ClInclude Include="src\gui\gcr_button_base.h" />
+    <ClInclude Include="src\gui\gcr_frame_base.h" />
+    <ClInclude Include="src\gui\gcr_menubar_base.h" />
+    <ClInclude Include="src\gui\gcr_panel_base.h" />
+    <ClInclude Include="src\gui\gcr_slider_base.h" />
+    <ClInclude Include="src\gui\menubars\gcr_menubar_mainframe.h" />
+    <ClInclude Include="src\gui\panels\gcr_panel_files.h" />
+    <ClInclude Include="src\gui\panels\gcr_panel_filters.h" />
+    <ClInclude Include="src\gui\panels\gcr_panel_mediactrls.h" />
+    <ClInclude Include="src\gui\panels\gcr_panel_preferences.h" />
+    <ClInclude Include="src\gui\panels\gcr_panel_screen.h" />
+    <ClInclude Include="src\gui\panels\gcr_panel_vcr.h" />
     <ClInclude Include="src\interfaces\i_filemanager.h" />
     <ClInclude Include="src\interfaces\i_filtermanager.h" />
     <ClInclude Include="src\interfaces\i_mediaplayer.h" />
-    <ClInclude Include="src\mainframe.h" />
     <ClInclude Include="src\utilities\filemanager.h" />
     <ClInclude Include="src\utilities\filtermanager.h" />
-    <ClInclude Include="src\utilities\ids.h" />
+    <ClInclude Include="src\utilities\gcr_aui_manager.h" />
     <ClInclude Include="src\utilities\img_utils.h" />
     <ClInclude Include="src\utilities\mediaplayer.h" />
+    <ClInclude Include="src\utilities\config_manager.h" />
+    <ClInclude Include="src\utilities\theme_manager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -132,7 +128,7 @@
     <IncludePath>C:\Users\Gusta\source\repos\Barfograph;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ExternalIncludePath>C:\Libraries\wxWidgets-3.2.6\include;C:\Libraries\wxWidgets-3.2.6\include\msvc;C:\Libraries\ffmpeg-7.1.1-full_build-shared\include;C:\VulkanSDK\1.4.313.2\Include\SDL2;C:\Libraries\opencv\build\include;C:\Libraries\onnxruntime-win-x64-gpu-1.20.1\include;C:\Libraries\libwebp-1.6.0\src\;C:\Libraries\eigen-3.4.0</ExternalIncludePath>
+    <ExternalIncludePath>C:\Libraries\nlohmann_json;C:\Libraries\wxWidgets-3.2.6\include;C:\Libraries\wxWidgets-3.2.6\include\msvc;C:\Libraries\ffmpeg-7.1.1-full_build-shared\include;C:\VulkanSDK\1.4.313.2\Include\SDL2;C:\Libraries\opencv\build\include;C:\Libraries\onnxruntime-win-x64-gpu-1.20.1\include;C:\Libraries\libwebp-1.6.0\src\;C:\Libraries\eigen-3.4.0</ExternalIncludePath>
     <LibraryPath>C:\Libraries\wxWidgets-3.2.6\lib\vc_x64_lib;C:\Libraries\ffmpeg-7.1.1-full_build-shared\lib;C:\VulkanSDK\1.4.313.2\Lib;C:\Libraries\opencv\build\x64\vc16\lib;C:\Libraries\onnxruntime-win-x64-gpu-1.20.1\lib;C:\Libraries\libwebp-1.6.0\output\release-static\x64\lib;$(LibraryPath)</LibraryPath>
     <IncludePath>C:\Users\Gusta\source\repos\Barfograph;$(IncludePath)</IncludePath>
   </PropertyGroup>

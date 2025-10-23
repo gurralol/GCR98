@@ -30,6 +30,7 @@ public:
 	void Sort();
 
 	bool IsSupportedFile(std::filesystem::path path);
+	int IsImageFile(std::filesystem::path path);
 };
 
 //-------------------------//

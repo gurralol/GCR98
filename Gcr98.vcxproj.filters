@@ -1,14 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\app.cpp">
+    <ClCompile Include="src\gcr_app.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mainframe.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\filters\filter_blur.cpp">
-      <Filter>src\filters</Filter>
     </ClCompile>
     <ClCompile Include="src\utilities\filemanager.cpp">
       <Filter>src\utilities</Filter>
@@ -22,64 +16,61 @@
     <ClCompile Include="src\utilities\mediaplayer.cpp">
       <Filter>src\utilities</Filter>
     </ClCompile>
-    <ClCompile Include="src\gui\menubar.cpp">
+    <ClCompile Include="src\gui\gcr_menubar_base.cpp">
       <Filter>src\gui</Filter>
     </ClCompile>
-    <ClCompile Include="src\gui\panel_files.cpp">
+    <ClCompile Include="src\gui\gcr_panel_base.cpp">
       <Filter>src\gui</Filter>
     </ClCompile>
-    <ClCompile Include="src\gui\panel_files_settings.cpp">
+    <ClCompile Include="src\utilities\config_manager.cpp">
+      <Filter>src\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gcr_button_base.cpp">
       <Filter>src\gui</Filter>
     </ClCompile>
-    <ClCompile Include="src\gui\panel_filter.cpp">
+    <ClCompile Include="src\gui\gcr_frame_base.cpp">
       <Filter>src\gui</Filter>
     </ClCompile>
-    <ClCompile Include="src\gui\panel_filters.cpp">
+    <ClCompile Include="src\gui\menubars\gcr_menubar_mainframe.cpp">
+      <Filter>src\gui\menubars</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\frames\gcr_frame_preferences.cpp">
+      <Filter>src\gui\frames</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panels\gcr_panel_preferences.cpp">
+      <Filter>src\gui\panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panels\gcr_panel_files.cpp">
+      <Filter>src\gui\panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panels\gcr_panel_filters.cpp">
+      <Filter>src\gui\panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panels\gcr_panel_mediactrls.cpp">
+      <Filter>src\gui\panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panels\gcr_panel_screen.cpp">
+      <Filter>src\gui\panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panels\gcr_panel_vcr.cpp">
+      <Filter>src\gui\panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\frames\gcr_frame_main.cpp">
+      <Filter>src\gui\frames</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utilities\gcr_aui_manager.cpp">
+      <Filter>src\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utilities\theme_manager.cpp">
+      <Filter>src\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gcr_slider_base.cpp">
       <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\panel_filters_settings.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\panel_media.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\panel_mediactrls.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\panel_playlist.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\panel_render_settings.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\panel_vcr.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\controllers\controller_filemanager.cpp">
-      <Filter>src\controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\controllers\controller_filtermanager.cpp">
-      <Filter>src\controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\controllers\controller_mediaplayer.cpp">
-      <Filter>src\controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\panel_master.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\filters\filter_faceswap.cpp">
-      <Filter>src\filters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\app.h">
+    <ClInclude Include="src\gcr_app.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mainframe.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\filters\filter_blur.h">
-      <Filter>src\filters</Filter>
     </ClInclude>
     <ClInclude Include="src\utilities\filemanager.h">
       <Filter>src\utilities</Filter>
@@ -93,50 +84,8 @@
     <ClInclude Include="src\utilities\mediaplayer.h">
       <Filter>src\utilities</Filter>
     </ClInclude>
-    <ClInclude Include="src\gui\menubar.h">
+    <ClInclude Include="src\gui\gcr_menubar_base.h">
       <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\panel_files.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\panel_files_settings.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\panel_filter.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\panel_filters.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\panel_filters_settings.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\panel_media.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\panel_mediactrls.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\panel_playlist.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\panel_render_settings.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\panel_vcr.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\utilities\ids.h">
-      <Filter>src\utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\controllers\controller_filemanager.h">
-      <Filter>src\controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\controllers\controller_filtermanager.h">
-      <Filter>src\controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\controllers\controller_mediaplayer.h">
-      <Filter>src\controllers</Filter>
     </ClInclude>
     <ClInclude Include="src\interfaces\i_filemanager.h">
       <Filter>src\interfaces</Filter>
@@ -147,14 +96,53 @@
     <ClInclude Include="src\interfaces\i_mediaplayer.h">
       <Filter>src\interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="src\gui\panel_master.h">
+    <ClInclude Include="src\gui\gcr_panel_base.h">
       <Filter>src\gui</Filter>
     </ClInclude>
-    <ClInclude Include="src\filters\filters.h">
-      <Filter>src\filters</Filter>
+    <ClInclude Include="src\utilities\config_manager.h">
+      <Filter>src\utilities</Filter>
     </ClInclude>
-    <ClInclude Include="src\filters\filter_faceswap.h">
-      <Filter>src\filters</Filter>
+    <ClInclude Include="src\gui\gcr_button_base.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\gcr_frame_base.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\menubars\gcr_menubar_mainframe.h">
+      <Filter>src\gui\menubars</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\frames\gcr_frame_preferences.h">
+      <Filter>src\gui\frames</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panels\gcr_panel_preferences.h">
+      <Filter>src\gui\panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panels\gcr_panel_files.h">
+      <Filter>src\gui\panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panels\gcr_panel_filters.h">
+      <Filter>src\gui\panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panels\gcr_panel_mediactrls.h">
+      <Filter>src\gui\panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panels\gcr_panel_screen.h">
+      <Filter>src\gui\panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panels\gcr_panel_vcr.h">
+      <Filter>src\gui\panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\frames\gcr_frame_main.h">
+      <Filter>src\gui\frames</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\gcr_aui_manager.h">
+      <Filter>src\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\theme_manager.h">
+      <Filter>src\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\gcr_slider_base.h">
+      <Filter>src\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +163,15 @@
     </Filter>
     <Filter Include="src\interfaces">
       <UniqueIdentifier>{5d193803-95bc-4a75-9908-fc4de3e220cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gui\frames">
+      <UniqueIdentifier>{bb6deab6-f10d-4aed-a9b2-e48060ce882a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gui\menubars">
+      <UniqueIdentifier>{358db7c9-52e9-4799-bf07-c608ffca2871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gui\panels">
+      <UniqueIdentifier>{d24e85e8-9d51-4b4b-9389-86ea6c9d3cf5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
