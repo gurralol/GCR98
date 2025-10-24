@@ -25,7 +25,6 @@ public:
 
 	gcr_frame_preferences* m_frame_preferences;
 
-	void bind_events();
     void set_window_settings_recursively(wxWindow* parent);
 
 	// Menu Bar Events

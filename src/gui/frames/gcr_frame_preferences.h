@@ -3,6 +3,7 @@
 #include "../gcr_frame_base.h"
 #include "../panels/gcr_panel_preferences.h"
 #include "../../utilities/gcr_aui_manager.h"
+#include "../../utilities/theme_manager.h"
 
 class gcr_frame_preferences : public gcr_frame_base
 {

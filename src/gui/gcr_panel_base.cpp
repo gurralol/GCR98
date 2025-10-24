@@ -5,7 +5,7 @@ gcr_panel_base::gcr_panel_base(wxWindow* parent, wxWindowID id, wxPoint pos, wxS
 {
 	SetBackgroundStyle(wxBG_STYLE_PAINT);
 
-	apply_theme(gcr_theme_sunburst);
+	apply_theme(gcr_theme_midnight_mix);
 	apply_borderstyle(gcr_borderstyle_plastic_ridge);
 
 	Bind(wxEVT_PAINT, &gcr_panel_base::on_paint, this);
@@ -36,9 +36,11 @@ void gcr_panel_base::on_paint(wxPaintEvent&)
 {
     wxAutoBufferedPaintDC dc(this);
     wxSize client_size = GetClientSize();
+    //dc.Clear();
 
     switch (m_theme) {
         case gcr_theme_midnight_mix: {
+            dc.GradientFillLinear(wxRect(0, 0, client_size.x, client_size.y), *wxBLACK, *wxBLACK, wxSOUTH);
             break;
         }
         case gcr_theme_sunburst: {
@@ -46,15 +48,19 @@ void gcr_panel_base::on_paint(wxPaintEvent&)
             break;
         }
         case gcr_retro_green: {
+            dc.GradientFillLinear(wxRect(0, 0, client_size.x, client_size.y), *wxGREEN, *wxBLACK, wxSOUTH);
             break;
         }
         case gcr_vhs_static: {
+            dc.GradientFillLinear(wxRect(0, 0, client_size.x, client_size.y), *wxLIGHT_GREY, *wxBLACK, wxSOUTH);
             break;
         }
         case gcr_classic_98: {
+            dc.GradientFillLinear(wxRect(0, 0, client_size.x, client_size.y), *wxWHITE, *wxBLACK, wxSOUTH);
             break;
         }
         case gcr_theme_neon_dreams: {
+            dc.GradientFillLinear(wxRect(0, 0, client_size.x, client_size.y), wxColour(255, 0, 255), *wxGREEN, wxSOUTH);
             break;
         }
     }

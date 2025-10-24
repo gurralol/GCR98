@@ -31,23 +31,17 @@ gcr_frame_main::gcr_frame_main(const wxString& title) : gcr_frame_base(title)
 	gcr_panel_base* panel2 = new gcr_panel_base(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 	gcr_panel_base* panel3 = new gcr_panel_base(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 	m_panel_mediactrls = new gcr_panel_mediactrls(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
-	m_aui_manager->AddPane(panel1, wxAuiPaneInfo().Name("Panel 1").Caption("Files").Left().CloseButton(true).MaximizeButton(true).MinSize(200, 200).BestSize(300, 300).PaneBorder(false));
-	m_aui_manager->AddPane(panel3, wxAuiPaneInfo().Name("Panel 3").Caption("Screen").Center().CloseButton(true).MaximizeButton(true).MinSize(200, 500).BestSize(300, 300).PaneBorder(false));
-	m_aui_manager->AddPane(m_panel_mediactrls, wxAuiPaneInfo().Name("Panel 4").Caption("Controls").Center().CloseButton(true).MaximizeButton(true).MinSize(200, 50).BestSize(300, 300).PaneBorder(false));
-	m_aui_manager->AddPane(panel2, wxAuiPaneInfo().Name("Panel 2").Caption("Filters").Right().CloseButton(true).MaximizeButton(true).MinSize(200, 200).BestSize(300, 300).PaneBorder(false));
+	m_aui_manager->AddPane(panel1, wxAuiPaneInfo().Name("Panel 1").Caption("Files").Left().CloseButton(true).MaximizeButton(true).MinSize(350, 200).BestSize(300, 300).PaneBorder(false));
+	m_aui_manager->AddPane(panel3, wxAuiPaneInfo().Name("Panel 3").Caption("Screen").Center().CloseButton(true).MaximizeButton(true).MinSize(200, 700).BestSize(300, 300).PaneBorder(false));
+	m_aui_manager->AddPane(m_panel_mediactrls, wxAuiPaneInfo().Name("panel_mediactrls").Caption("Controls").Center().CloseButton(true).MaximizeButton(true).MinSize(200, 50).BestSize(300, 300).PaneBorder(false));
+	m_aui_manager->AddPane(panel2, wxAuiPaneInfo().Name("Panel 4").Caption("Filters").Right().CloseButton(true).MaximizeButton(true).MinSize(350, 200).BestSize(300, 300).PaneBorder(false));
 	
 	m_aui_manager->Update();
-
-	bind_events();
 
 	Layout();
 }
 
 gcr_frame_main::~gcr_frame_main()
-{
-}
-
-void gcr_frame_main::bind_events()
 {
 }
 

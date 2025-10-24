@@ -11,8 +11,8 @@ public:
 	wxBoxSizer* m_main_sizer;
 	wxChoice* m_choice_theme;
 	wxChoice* m_choice_borderstyle;
-	wxChoice* m_dockart_choice;
-
-private:
-
+	wxChoice* m_choice_buttonstyle;
+	wxChoice* m_choice_font;
+	wxChoice* m_choice_dockart;
+	wxChoice* m_choice_vcr;
 };

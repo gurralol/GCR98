@@ -18,3 +18,8 @@ gcr_aui_manager::gcr_aui_manager(wxWindow* managed_wnd, unsigned int flags) : wx
 gcr_aui_manager::~gcr_aui_manager()
 {
 }
+
+void gcr_aui_manager::apply_theme(int selection)
+{
+
+}

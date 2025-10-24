@@ -10,6 +10,11 @@ gcr_button_base::gcr_button_base(wxWindow* parent, wxWindowID id, const wxString
 
 	Bind(wxEVT_PAINT, &gcr_button_base::on_paint, this);
 
+    Bind(wxEVT_SIZE, [=](wxSizeEvent& event) {
+        Refresh();
+        event.Skip();
+        });
+
     Bind(wxEVT_ENTER_WINDOW, &gcr_button_base::on_mouse_enter, this);
     Bind(wxEVT_LEAVE_WINDOW, &gcr_button_base::on_mouse_leave, this);
 
@@ -31,9 +36,11 @@ void gcr_button_base::on_paint(wxPaintEvent&)
 {
     wxAutoBufferedPaintDC dc(this);
     wxSize client_size = GetClientSize();
+    dc.Clear();
 
     switch (m_buttonstyle) {
     case gcr_buttonstyle_modern_flat: {
+		dc.FloodFill(client_size.x, client_size.y, *wxBLACK);
         break;
     }
     case gcr_buttonstyle_classic_3d: {

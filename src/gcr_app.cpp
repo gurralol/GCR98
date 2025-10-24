@@ -1,4 +1,5 @@
 ﻿#include <wx/wxprec.h>
+#include <wx/sysopt.h>
 #include "gcr_app.h"
 #include "gui/frames/gcr_frame_main.h"
 
