@@ -88,6 +88,12 @@ int file_manager::sort_files(int sort_mode)
     return 0;
 }
 
+int file_manager::clear_files()
+{
+    m_files.clear();
+    return 0;
+}
+
 int file_manager::file_type(std::filesystem::path path)
 {
     std::string ext = path.extension().string().c_str();

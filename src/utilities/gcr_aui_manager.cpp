@@ -21,5 +21,9 @@ gcr_aui_manager::~gcr_aui_manager()
 
 void gcr_aui_manager::apply_theme(int selection)
 {
-
+	switch (selection)
+	{
+	case 1:
+		break;
+	}
 }

@@ -14,7 +14,7 @@ public:
 	static wxImage wxFromCv(const cv::Mat& mat);
 	static cv::Mat cvFromWx(wxImage img);
 
-	static void Borders_Rounded(wxImage &img, int radius);
+	static void borders_rounded(wxImage &img, int radius);
 
 	enum //Fit
 	{
@@ -24,7 +24,7 @@ public:
 	};
 
 	static wxImage get_thumbnail_cache(std::filesystem::path path, int width, int height, int fit);
-	static wxImage get_thumbnail_ffmpeg(std::filesystem::path path, int width, int height, int fit);
+	/*static wxImage get_thumbnail_ffmpeg(std::filesystem::path path, int width, int height, int fit);
 	static wxImage get_thumbnail_opencv(std::filesystem::path path, int width, int height, int fit);
-	static wxImage get_thumbnail_libwebp(std::filesystem::path path, int width, int height, int fit);
+	static wxImage get_thumbnail_libwebp(std::filesystem::path path, int width, int height, int fit);*/
 };

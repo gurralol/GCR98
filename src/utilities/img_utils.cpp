@@ -115,7 +115,7 @@ cv::Mat img_utils::cvFromWx(wxImage img)
     return mat.clone();
 }
 
-void img_utils::Borders_Rounded(wxImage& img, int radius)
+void img_utils::borders_rounded(wxImage& img, int radius)
 {
     int width = img.GetWidth();
     int height = img.GetHeight();
@@ -355,17 +355,17 @@ wxImage img_utils::get_thumbnail_cache(std::filesystem::path path, int width, in
     return result;
 }
 
-wxImage img_utils::get_thumbnail_opencv(std::filesystem::path path, int width, int height, int fit)
-{
-    return wxImage();
-}
-
-wxImage img_utils::get_thumbnail_ffmpeg(std::filesystem::path path, int width, int height, int fit)
-{
-    return wxImage();
-}
-
-wxImage img_utils::get_thumbnail_libwebp(std::filesystem::path path, int width, int height, int fit)
-{
-    return wxImage();
-}
+//wxImage img_utils::get_thumbnail_opencv(std::filesystem::path path, int width, int height, int fit)
+//{
+//    return wxImage();
+//}
+//
+//wxImage img_utils::get_thumbnail_ffmpeg(std::filesystem::path path, int width, int height, int fit)
+//{
+//    return wxImage();
+//}
+//
+//wxImage img_utils::get_thumbnail_libwebp(std::filesystem::path path, int width, int height, int fit)
+//{
+//    return wxImage();
+//}

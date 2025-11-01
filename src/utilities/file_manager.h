@@ -35,6 +35,7 @@ public:
 	int set_directory(std::filesystem::path path);
 	int open_directory(bool recursive);
 	int sort_files(int sort_mode);
+	int clear_files();
 
 	int file_type(std::filesystem::path path);
 };

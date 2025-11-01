@@ -29,4 +29,6 @@ void gcr_panel_vcr::on_paint(wxPaintEvent& event)
     dc.SetPen(wxPen(wxColour(16, 16, 16), 6));
     dc.DrawLine(r.GetRight(), r.GetTop(), r.GetRight(), r.GetBottom());
     dc.DrawLine(r.GetLeft(), r.GetBottom(), r.GetRight(), r.GetBottom());
+
+	event.Skip();
 }

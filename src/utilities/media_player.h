@@ -1,12 +1,6 @@
 #pragma once
 #include <wx/wxprec.h>
 #include <filesystem>
-#include <fstream>
-#include <functional>
-#include <chrono>
-#include <thread>
-#include <atomic>
-#include <mutex>
 
 extern "C" {
 #include <libavcodec/avcodec.h>
@@ -19,59 +13,36 @@ extern "C" {
 
 #include <SDL.h>
 
-#include <webp/demux.h>
-#include <webp/decode.h>
-
-class MediaPlayer
+class media_player
 {
 public:
-	MediaPlayer();
-	~MediaPlayer();
+	media_player(std::function<void(const unsigned char*, int, int, int)> paint_cb);
+	~media_player();
 
-	std::filesystem::path path;
-	int mediaWidth;
-	int mediaHeight;
-	float fps;
-	float duration;
+	std::function<void(const unsigned char*, int, int, int)> paint_cb;
+
 	float volume;
-	std::function<void()> paintCallback;
-	std::mutex frameMutex;
-
 	bool loop;
 
-	wxImage currFrame;
-	double currTime;
-	double seekTarget;
+	void load_media(const std::filesystem::path& media_path);
 
-	std::atomic_bool restrictProcessing;
-	std::atomic_bool isProcessing;
+	void play_media();
+	void pause_media();
+	void stop_media();
 
-	// FFmpeg
-	AVFormatContext* formatCtx;
-	AVCodecContext* vCodecCtx;
-	AVCodecContext* aCodecCtx;
-	int vStreamIdx;
-	int aStreamIdx;
+	void set_volume(float volume);
 
-	// Libwebp
-	WebPData* webpData;
-	WebPDemuxer* webpDemux;
+	void seek_to_position(double position);
 
-	void InitFFmpeg();
-	void InitWebP();
+	void rewind_media(float speed_multiplied);
+	void fast_forward_media(float speed_multiplied);
 
-	void FreeAll();
-	void FreeFFmpeg();
-	void FreeWebp();
-	
-	void SeekFFmpeg();
-	void SeekLibwebp();
+	void jump_forward(double seconds);
+	void jump_backward(double seconds);
 
-	void DecodeFrameFFmpeg();
-	void DecodeFrameLibwebp();
+	void jump_to_media_start();
+	void jump_to_media_end();
 
-	void ProcessFFmpeg();
-	void ProcessLibwebp();
-
-	void StopProcessing();
+	void jump_to_next_media();
+	void jump_to_previous_media();
 };

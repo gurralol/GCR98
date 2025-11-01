@@ -14,8 +14,10 @@
 #include "../../utilities/gcr_aui_manager.h"
 
 #include "../../utilities/file_manager.h"
+#include "../../utilities/media_player.h"
 
 #include "../panels/gcr_panel_files.h"
+#include "../panels/gcr_panel_playlist.h"
 #include "../panels/gcr_panel_screen.h"
 #include "../panels/gcr_panel_mediactrls.h"
 #include "../panels/gcr_panel_filters.h"
@@ -38,11 +40,15 @@ public:
 	// File Manager
 	file_manager* m_file_manager;
 
+	// Media Player
+	media_player* m_media_player;
+
 	// Main Sizer for the Frame
 	wxBoxSizer* m_main_sizer;
 
 	// Panels
 	gcr_panel_files* m_panel_files;
+	gcr_panel_playlist* m_panel_playlist;
 	gcr_panel_screen* m_panel_screen;
 	gcr_panel_mediactrls* m_panel_mediactrls;
 	gcr_panel_filters* m_panel_filters;
@@ -55,7 +61,11 @@ public:
     
 	// Utilities
     void set_window_settings_recursively(wxWindow* parent);
-	void add_file_buttons_to_files_panel();
+	void populate_files_panel();
+
+	void file_thumbnail_on_left_up(wxMouseEvent& event);
+
+	void update_media_screen();
     
 	wxDECLARE_EVENT_TABLE();
 };

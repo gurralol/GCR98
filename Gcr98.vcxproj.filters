@@ -70,6 +70,15 @@
     <ClCompile Include="src\gui\buttons\gcr_button_thumbnail.cpp">
       <Filter>src\gui\buttons</Filter>
     </ClCompile>
+    <ClCompile Include="src\gui\gcr_choice_base.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gcr_list_base.cpp">
+      <Filter>src\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\panels\gcr_panel_playlist.cpp">
+      <Filter>src\gui\panels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gcr_app.h">
@@ -149,6 +158,15 @@
     </ClInclude>
     <ClInclude Include="src\gui\buttons\gcr_button_thumbnail.h">
       <Filter>src\gui\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\gcr_choice_base.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\gcr_list_base.h">
+      <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\panels\gcr_panel_playlist.h">
+      <Filter>src\gui\panels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

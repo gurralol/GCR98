@@ -30,16 +30,23 @@ gcr_frame_main::gcr_frame_main(const wxString& title) : gcr_frame_base(title)
 	// File Manager
 	m_file_manager = new file_manager();
 
+	// Media Player with callback
+	m_media_player = new media_player([this](const unsigned char* rgb_data, int width, int height, int linesize) {
+		this->update_media_screen();
+	});
+
 	// Main Sizer
 	m_main_sizer = new wxBoxSizer(wxVERTICAL);
 	this->SetSizer(m_main_sizer);
 
 	// Panels
 	m_panel_files = new gcr_panel_files(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
+	m_panel_playlist = new gcr_panel_playlist(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 	m_panel_screen = new gcr_panel_screen(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 	m_panel_mediactrls = new gcr_panel_mediactrls(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 	m_panel_filters = new gcr_panel_filters(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
-	m_aui_manager->AddPane(m_panel_files, wxAuiPaneInfo().Name("panel_files").Caption("Files").Left().CloseButton(true).MaximizeButton(true).MinSize(350, 200).BestSize(300, 300).PaneBorder(false));
+	m_aui_manager->AddPane(m_panel_files, wxAuiPaneInfo().Name("panel_files").Caption("Files").Left().CloseButton(true).MaximizeButton(true).MinSize(350, 700).BestSize(300, 700).PaneBorder(false));
+	m_aui_manager->AddPane(m_panel_playlist, wxAuiPaneInfo().Name("panel_playlist").Caption("Playlist").Left().CloseButton(true).MaximizeButton(true).MinSize(200, 150).BestSize(300, 150).PaneBorder(false));
 	m_aui_manager->AddPane(m_panel_screen, wxAuiPaneInfo().Name("panel_screen").Caption("Screen").Center().CloseButton(true).MaximizeButton(true).MinSize(200, 700).BestSize(300, 300).PaneBorder(false));
 	m_aui_manager->AddPane(m_panel_mediactrls, wxAuiPaneInfo().Name("panel_mediactrls").Caption("Controls").Center().CloseButton(true).MaximizeButton(true).MinSize(200, 50).BestSize(300, 300).PaneBorder(false));
 	m_aui_manager->AddPane(m_panel_filters, wxAuiPaneInfo().Name("panel_filters").Caption("Filters").Right().CloseButton(true).MaximizeButton(true).MinSize(350, 200).BestSize(300, 300).PaneBorder(false));
@@ -50,8 +57,6 @@ gcr_frame_main::gcr_frame_main(const wxString& title) : gcr_frame_base(title)
 
 	Layout();
 }
-
-void add_file_buttons_to_panel(wxPanel* panel, file_manager* fm);
 
 gcr_frame_main::~gcr_frame_main()
 {
@@ -79,6 +84,8 @@ void gcr_frame_main::menubar_open_directory_onclick(wxCommandEvent& event)
 		return;
 	}
 
+	m_file_manager->clear_files();
+	
 	std::filesystem::path path(dir_path.ToStdWstring());
 	if (m_file_manager->set_directory(path) != 0)
 	{
@@ -92,7 +99,7 @@ void gcr_frame_main::menubar_open_directory_onclick(wxCommandEvent& event)
 		return;
 	}
 
-	add_file_buttons_to_files_panel();
+	populate_files_panel();
 
 	event.Skip();
 }
@@ -100,6 +107,7 @@ void gcr_frame_main::menubar_open_directory_onclick(wxCommandEvent& event)
 void gcr_frame_main::menubar_exit_onclick(wxCommandEvent& event)
 {
 	wxTheApp->Exit();
+	event.Skip();
 }
 
 void gcr_frame_main::menubar_settings_onclick(wxCommandEvent& event)
@@ -110,24 +118,31 @@ void gcr_frame_main::menubar_settings_onclick(wxCommandEvent& event)
 	m_frame_preferences->SetInitialSize(wxWindow::FromDIP(wxSize(300, 600), 0));
 	m_frame_preferences->Center();
 	m_frame_preferences->Show();
+	event.Skip();
 }
 
 void gcr_frame_main::menubar_about_onclick(wxCommandEvent& event)
 {
 	printf("About clicked\n");
+	event.Skip();
 }
 
-void gcr_frame_main::add_file_buttons_to_files_panel()
+void gcr_frame_main::populate_files_panel()
 {
-	wxGridSizer* sizer = m_panel_files->m_files_sizer;
-	sizer->Clear(true);
+	wxGridSizer* sizer = new wxGridSizer(0, 2, 0, 0);
+
+	wxScrolledWindow* scrolled_window = m_panel_files->m_scrolled_window;
+
+	if (scrolled_window->GetSizer())
+	{
+		scrolled_window->GetSizer()->Clear(true);
+	}
 
 	for (const auto& file_path : m_file_manager->m_files)
 	{
 		wxString file_name = file_path.filename().wstring();
 		wxSize btn_size = wxSize(148, 128);
-		gcr_button_thumbnail* file_button = new gcr_button_thumbnail(m_panel_files, wxID_ANY, "", wxDefaultPosition, btn_size);
-		file_button->SetBackgroundColour(*wxBLACK);
+		gcr_button_thumbnail* file_button = new gcr_button_thumbnail(scrolled_window, wxID_ANY, "", wxDefaultPosition, btn_size);
 		file_button->SetClientData(new std::filesystem::path(file_path));
 		wxImage thumbnail = img_utils::get_thumbnail_cache(file_path, btn_size.x, btn_size.y, img_utils::KEEP_AR);
 		if (thumbnail.IsOk())
@@ -135,7 +150,34 @@ void gcr_frame_main::add_file_buttons_to_files_panel()
 			wxBitmap bitmap(thumbnail);
 			file_button->m_thumbnail_image = thumbnail;
 		}
-		sizer->Add(file_button, 0, wxALIGN_CENTER, 0);
+		file_button->on_left_up_cb = [this](const wxMouseEvent& event) { this->file_thumbnail_on_left_up(const_cast<wxMouseEvent&>(event)); };
+		sizer->Add(file_button, 0);
 	}
+
+	scrolled_window->SetSizerAndFit(sizer);
 	m_panel_files->Layout();
+}
+
+void gcr_frame_main::file_thumbnail_on_left_up(wxMouseEvent& event)
+{
+	gcr_button_base* button = dynamic_cast<gcr_button_base*>(event.GetEventObject());
+	if (button)
+	{
+		std::filesystem::path* path_ptr = static_cast<std::filesystem::path*>(button->GetClientData());
+		if (path_ptr)
+		{
+			wxString msg = path_ptr->wstring();
+			printf("%s\n", msg.ToUTF8().data());
+		}
+	}
+}
+
+void gcr_frame_main::update_media_screen()
+{
+	// This will be called by the media player when a new frame is ready
+	// You can update the screen panel here with the new frame data
+	if (m_panel_screen)
+	{
+		m_panel_screen->Refresh();
+	}
 }

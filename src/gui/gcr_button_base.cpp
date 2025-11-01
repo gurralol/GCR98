@@ -85,6 +85,13 @@ void gcr_button_base::on_paint(wxPaintEvent&)
             dc.DrawText(GetLabel(), (client_size.x - dc.GetTextExtent(GetLabel()).x) / 2,
                 (client_size.y - dc.GetTextExtent(GetLabel()).y) / 2);
         }
+
+        if (m_toggle_state > 0) {
+            // Draw toggled state indicator
+            dc.SetBrush(wxBrush(wxColour(0, 255, 0, 128)));
+            dc.SetPen(*wxTRANSPARENT_PEN);
+            dc.DrawCircle(client_size.x - 10, 9, 3);
+		}
         break;
     }
     case gcr_buttonstyle_tape: {

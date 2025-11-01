@@ -26,7 +26,8 @@ public:
 	std::function<void(const wxMouseEvent&)> on_right_up_cb;
 	std::function<void(const wxMouseEvent&)> on_double_click_cb;
 
-//private:
+	int m_toggle_state = 0;
+
 	int m_buttonstyle;
 
 	virtual void on_paint(wxPaintEvent&);

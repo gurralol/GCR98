@@ -24,11 +24,13 @@ private:
 
 	gcr_slider_base* m_sldPosition;
 
+	gcr_slider_base* m_sldVolume;
 	gcr_button_base* m_btnEject;
 	gcr_button_base* m_btnRew;
 	gcr_button_base* m_btnPlay;
 	gcr_button_base* m_btnStop;
 	gcr_button_base* m_btnForw;
+	gcr_button_base* m_btnLoop;
 	gcr_button_base* m_btnRec;
 
 	gcr_panel_vcr* m_panelVCR;

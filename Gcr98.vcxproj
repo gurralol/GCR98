@@ -24,7 +24,9 @@
     <ClCompile Include="src\gui\frames\gcr_frame_main.cpp" />
     <ClCompile Include="src\gui\frames\gcr_frame_preferences.cpp" />
     <ClCompile Include="src\gui\gcr_button_base.cpp" />
+    <ClCompile Include="src\gui\gcr_choice_base.cpp" />
     <ClCompile Include="src\gui\gcr_frame_base.cpp" />
+    <ClCompile Include="src\gui\gcr_list_base.cpp" />
     <ClCompile Include="src\gui\gcr_menubar_base.cpp" />
     <ClCompile Include="src\gui\gcr_panel_base.cpp" />
     <ClCompile Include="src\gui\gcr_slider_base.cpp" />
@@ -32,6 +34,7 @@
     <ClCompile Include="src\gui\panels\gcr_panel_files.cpp" />
     <ClCompile Include="src\gui\panels\gcr_panel_filters.cpp" />
     <ClCompile Include="src\gui\panels\gcr_panel_mediactrls.cpp" />
+    <ClCompile Include="src\gui\panels\gcr_panel_playlist.cpp" />
     <ClCompile Include="src\gui\panels\gcr_panel_preferences.cpp" />
     <ClCompile Include="src\gui\panels\gcr_panel_screen.cpp" />
     <ClCompile Include="src\gui\panels\gcr_panel_vcr.cpp" />
@@ -49,7 +52,9 @@
     <ClInclude Include="src\gui\frames\gcr_frame_main.h" />
     <ClInclude Include="src\gui\frames\gcr_frame_preferences.h" />
     <ClInclude Include="src\gui\gcr_button_base.h" />
+    <ClInclude Include="src\gui\gcr_choice_base.h" />
     <ClInclude Include="src\gui\gcr_frame_base.h" />
+    <ClInclude Include="src\gui\gcr_list_base.h" />
     <ClInclude Include="src\gui\gcr_menubar_base.h" />
     <ClInclude Include="src\gui\gcr_panel_base.h" />
     <ClInclude Include="src\gui\gcr_slider_base.h" />
@@ -57,6 +62,7 @@
     <ClInclude Include="src\gui\panels\gcr_panel_files.h" />
     <ClInclude Include="src\gui\panels\gcr_panel_filters.h" />
     <ClInclude Include="src\gui\panels\gcr_panel_mediactrls.h" />
+    <ClInclude Include="src\gui\panels\gcr_panel_playlist.h" />
     <ClInclude Include="src\gui\panels\gcr_panel_preferences.h" />
     <ClInclude Include="src\gui\panels\gcr_panel_screen.h" />
     <ClInclude Include="src\gui\panels\gcr_panel_vcr.h" />
@@ -190,6 +196,7 @@
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -14,18 +14,21 @@ gcr_frame_preferences::gcr_frame_preferences(const wxString& title) : gcr_frame_
 	{
 		int selection = m_panel_preferences->m_choice_theme->GetSelection();
 		gcr_theme_manager::apply_theme_to_registered_members(1, selection);
+		event.Skip();
 		});
 
 	m_panel_preferences->m_choice_borderstyle->Bind(wxEVT_CHOICE, [this](wxCommandEvent& event)
 	{
 		int selection = m_panel_preferences->m_choice_borderstyle->GetSelection();
 		gcr_theme_manager::apply_theme_to_registered_members(2, selection);
+		event.Skip();
 		});
 
 	m_panel_preferences->m_choice_buttonstyle->Bind(wxEVT_CHOICE, [this](wxCommandEvent& event)
 		{
 		int selection = m_panel_preferences->m_choice_buttonstyle->GetSelection();
 		gcr_theme_manager::apply_theme_to_registered_members(3, selection);
+		event.Skip();
 		});
 
 
