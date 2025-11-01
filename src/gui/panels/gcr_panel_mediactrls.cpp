@@ -27,6 +27,10 @@ gcr_panel_mediactrls::gcr_panel_mediactrls(wxWindow* parent, wxWindowID id, cons
 
 	m_panelVCR = new gcr_panel_vcr(this, wxID_ANY, wxDefaultPosition, wxSize(400, 300));
 	m_mainSizer->Add(m_panelVCR, 1, wxEXPAND | wxALL, 10);
+
+	m_btnPlay->on_left_up_cb = [this](const wxMouseEvent& event) {
+		if (on_play_cb) on_play_cb(event);
+		};
 }
 
 gcr_panel_mediactrls::~gcr_panel_mediactrls()

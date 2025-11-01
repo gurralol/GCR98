@@ -128,6 +128,8 @@ void gcr_button_base::on_left_down(wxMouseEvent& event)
         if (!HasCapture()) CaptureMouse();
         Refresh();
 
+        if (on_left_down_cb) on_left_down_cb(event);
+
         // Synthesize a proper wxEVT_BUTTON and post it so parent handlers run.
         wxCommandEvent btnEvt(wxEVT_BUTTON, GetId());
         btnEvt.SetEventObject(this);
@@ -151,6 +153,8 @@ void gcr_button_base::on_left_up(wxMouseEvent& event)
         m_pressed = false;
         if (HasCapture()) ReleaseMouse();
         Refresh();
+
+        if (on_left_up_cb) on_left_up_cb(event); // Call user-defined click handler if any
     }
     // Allow default button behaviour (generate wxEVT_BUTTON)
     event.Skip();

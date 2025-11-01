@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\gcr_app.cpp" />
+    <ClCompile Include="src\gui\buttons\gcr_button_thumbnail.cpp" />
     <ClCompile Include="src\gui\frames\gcr_frame_main.cpp" />
     <ClCompile Include="src\gui\frames\gcr_frame_preferences.cpp" />
     <ClCompile Include="src\gui\gcr_button_base.cpp" />
@@ -34,16 +35,17 @@
     <ClCompile Include="src\gui\panels\gcr_panel_preferences.cpp" />
     <ClCompile Include="src\gui\panels\gcr_panel_screen.cpp" />
     <ClCompile Include="src\gui\panels\gcr_panel_vcr.cpp" />
-    <ClCompile Include="src\utilities\filemanager.cpp" />
-    <ClCompile Include="src\utilities\filtermanager.cpp" />
+    <ClCompile Include="src\utilities\file_manager.cpp" />
+    <ClCompile Include="src\utilities\filter_manager.cpp" />
     <ClCompile Include="src\utilities\gcr_aui_manager.cpp" />
     <ClCompile Include="src\utilities\img_utils.cpp" />
-    <ClCompile Include="src\utilities\mediaplayer.cpp" />
+    <ClCompile Include="src\utilities\media_player.cpp" />
     <ClCompile Include="src\utilities\config_manager.cpp" />
     <ClCompile Include="src\utilities\theme_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gcr_app.h" />
+    <ClInclude Include="src\gui\buttons\gcr_button_thumbnail.h" />
     <ClInclude Include="src\gui\frames\gcr_frame_main.h" />
     <ClInclude Include="src\gui\frames\gcr_frame_preferences.h" />
     <ClInclude Include="src\gui\gcr_button_base.h" />
@@ -61,11 +63,11 @@
     <ClInclude Include="src\interfaces\i_filemanager.h" />
     <ClInclude Include="src\interfaces\i_filtermanager.h" />
     <ClInclude Include="src\interfaces\i_mediaplayer.h" />
-    <ClInclude Include="src\utilities\filemanager.h" />
-    <ClInclude Include="src\utilities\filtermanager.h" />
+    <ClInclude Include="src\utilities\file_manager.h" />
+    <ClInclude Include="src\utilities\filter_manager.h" />
     <ClInclude Include="src\utilities\gcr_aui_manager.h" />
     <ClInclude Include="src\utilities\img_utils.h" />
-    <ClInclude Include="src\utilities\mediaplayer.h" />
+    <ClInclude Include="src\utilities\media_player.h" />
     <ClInclude Include="src\utilities\config_manager.h" />
     <ClInclude Include="src\utilities\theme_manager.h" />
   </ItemGroup>

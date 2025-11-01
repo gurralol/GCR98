@@ -11,7 +11,7 @@
 
 #include "img_utils.h"
 
-wxImage ImgUtils::Resize_Fit(wxImage img, int targetSizeX, int targetSizeY)
+wxImage img_utils::Resize_Fit(wxImage img, int targetSizeX, int targetSizeY)
 {
     int boxSizeX = targetSizeX;
     int boxSizeY = targetSizeY;
@@ -40,7 +40,7 @@ wxImage ImgUtils::Resize_Fit(wxImage img, int targetSizeX, int targetSizeY)
     return temp;
 }
 
-wxPoint ImgUtils::Position_Center(wxImage img, int windowSizeX, int windowSizeY)
+wxPoint img_utils::Position_Center(wxImage img, int windowSizeX, int windowSizeY)
 {
     int boxSizeX = windowSizeX;
     int boxSizeY = windowSizeY;
@@ -69,7 +69,7 @@ wxPoint ImgUtils::Position_Center(wxImage img, int windowSizeX, int windowSizeY)
     return wxPoint(posX, posY);
 }
 
-cv::Mat ImgUtils::ResizeCvMat(cv::Mat img, int targetSizeX, int targetSizeY)
+cv::Mat img_utils::ResizeCvMat(cv::Mat img, int targetSizeX, int targetSizeY)
 {
     int boxSizeX = targetSizeX;
     int boxSizeY = targetSizeY;
@@ -98,7 +98,7 @@ cv::Mat ImgUtils::ResizeCvMat(cv::Mat img, int targetSizeX, int targetSizeY)
     return temp;
 }
 
-wxImage ImgUtils::wxFromCv(const cv::Mat& mat)
+wxImage img_utils::wxFromCv(const cv::Mat& mat)
 {
     cv::Mat rgb;
     cv::cvtColor(mat, rgb, cv::COLOR_BGR2RGB);
@@ -107,7 +107,7 @@ wxImage ImgUtils::wxFromCv(const cv::Mat& mat)
     return safe;
 }
 
-cv::Mat ImgUtils::cvFromWx(wxImage img)
+cv::Mat img_utils::cvFromWx(wxImage img)
 {
     wxImage copy = img.Copy();
     cv::Mat mat(img.GetHeight(), img.GetWidth(), CV_8UC3, (void*)copy.GetData());
@@ -115,7 +115,7 @@ cv::Mat ImgUtils::cvFromWx(wxImage img)
     return mat.clone();
 }
 
-void ImgUtils::Borders_Rounded(wxImage& img, int radius)
+void img_utils::Borders_Rounded(wxImage& img, int radius)
 {
     int width = img.GetWidth();
     int height = img.GetHeight();
@@ -153,7 +153,7 @@ void ImgUtils::Borders_Rounded(wxImage& img, int radius)
     RoundCorners(width - radius - 1, height - radius - 1, width - radius, height - radius, width, height);
 }
 
-wxImage ImgUtils::GetThumbnail_ThumbnailCache(std::filesystem::path path, int width, int height, int fit)
+wxImage img_utils::get_thumbnail_cache(std::filesystem::path path, int width, int height, int fit)
 {
     wxImage result;
 
@@ -355,17 +355,17 @@ wxImage ImgUtils::GetThumbnail_ThumbnailCache(std::filesystem::path path, int wi
     return result;
 }
 
-wxImage ImgUtils::GetThumbnail_OpenCV(std::filesystem::path path, int width, int height, int fit)
+wxImage img_utils::get_thumbnail_opencv(std::filesystem::path path, int width, int height, int fit)
 {
     return wxImage();
 }
 
-wxImage ImgUtils::GetThumbnail_FFmpeg(std::filesystem::path path, int width, int height, int fit)
+wxImage img_utils::get_thumbnail_ffmpeg(std::filesystem::path path, int width, int height, int fit)
 {
     return wxImage();
 }
 
-wxImage ImgUtils::GetThumbnail_libwebp(std::filesystem::path path, int width, int height, int fit)
+wxImage img_utils::get_thumbnail_libwebp(std::filesystem::path path, int width, int height, int fit)
 {
     return wxImage();
 }

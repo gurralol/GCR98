@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include <wx/wxprec.h>
 
 class gcr_button_base : public wxButton
@@ -19,10 +20,16 @@ public:
 
 	void apply_theme(int selection);
 
-private:
+	std::function<void(const wxMouseEvent&)> on_left_down_cb;
+	std::function<void(const wxMouseEvent&)> on_left_up_cb;
+	std::function<void(const wxMouseEvent&)> on_right_down_cb;
+	std::function<void(const wxMouseEvent&)> on_right_up_cb;
+	std::function<void(const wxMouseEvent&)> on_double_click_cb;
+
+//private:
 	int m_buttonstyle;
 
-	void on_paint(wxPaintEvent&);
+	virtual void on_paint(wxPaintEvent&);
 
 	bool m_hovered = false;
 	void on_mouse_enter(wxMouseEvent& event);

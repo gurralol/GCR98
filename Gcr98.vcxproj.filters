@@ -4,16 +4,16 @@
     <ClCompile Include="src\gcr_app.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\utilities\filemanager.cpp">
+    <ClCompile Include="src\utilities\file_manager.cpp">
       <Filter>src\utilities</Filter>
     </ClCompile>
-    <ClCompile Include="src\utilities\filtermanager.cpp">
+    <ClCompile Include="src\utilities\filter_manager.cpp">
       <Filter>src\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\utilities\img_utils.cpp">
       <Filter>src\utilities</Filter>
     </ClCompile>
-    <ClCompile Include="src\utilities\mediaplayer.cpp">
+    <ClCompile Include="src\utilities\media_player.cpp">
       <Filter>src\utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\gui\gcr_menubar_base.cpp">
@@ -67,21 +67,24 @@
     <ClCompile Include="src\gui\gcr_slider_base.cpp">
       <Filter>src\gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\gui\buttons\gcr_button_thumbnail.cpp">
+      <Filter>src\gui\buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gcr_app.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\utilities\filemanager.h">
+    <ClInclude Include="src\utilities\file_manager.h">
       <Filter>src\utilities</Filter>
     </ClInclude>
-    <ClInclude Include="src\utilities\filtermanager.h">
+    <ClInclude Include="src\utilities\filter_manager.h">
       <Filter>src\utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\utilities\img_utils.h">
       <Filter>src\utilities</Filter>
     </ClInclude>
-    <ClInclude Include="src\utilities\mediaplayer.h">
+    <ClInclude Include="src\utilities\media_player.h">
       <Filter>src\utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\gui\gcr_menubar_base.h">
@@ -144,6 +147,9 @@
     <ClInclude Include="src\gui\gcr_slider_base.h">
       <Filter>src\gui</Filter>
     </ClInclude>
+    <ClInclude Include="src\gui\buttons\gcr_button_thumbnail.h">
+      <Filter>src\gui\buttons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -172,6 +178,9 @@
     </Filter>
     <Filter Include="src\gui\panels">
       <UniqueIdentifier>{d24e85e8-9d51-4b4b-9389-86ea6c9d3cf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gui\buttons">
+      <UniqueIdentifier>{7734ae4a-93fa-4eda-b67d-36b6f61b24f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

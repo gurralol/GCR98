@@ -1,4 +1,4 @@
-#include "mediaplayer.h"
+#include "media_player.h"
 
 MediaPlayer::MediaPlayer()
 {

@@ -11,6 +11,14 @@ public:
 	gcr_panel_mediactrls(wxWindow* parent, wxWindowID id, const wxPoint pos, const wxSize size);
 	~gcr_panel_mediactrls();
 
+	// Button Callbacks
+	std::function<void(const wxMouseEvent&)> on_eject_cb;
+	std::function<void(const wxMouseEvent&)> on_rewind_cb;
+	std::function<void(const wxMouseEvent&)> on_play_cb;
+	std::function<void(const wxMouseEvent&)> on_stop_cb;
+	std::function<void(const wxMouseEvent&)> on_forward_cb;
+	std::function<void(const wxMouseEvent&)> on_record_cb;
+
 private:
 	wxBoxSizer* m_mainSizer;
 
